@@ -1,0 +1,132 @@
+<div class="row no-gutters">
+  <div class="col-sm-12 col-md-6 col-lg-6 offset-md-3 offset-lg-3">
+    <div class="card">
+      <div class="card-header bg-dark">
+        <h4 class="card-title text-white">
+          Product Order Entry
+        </h4>
+      </div>
+
+      <div class="card-body">
+        <form (ngSubmit)="onSave(productForm)" #productForm="ngForm">
+          <div class="form-group row">
+            <label for="Product" class="col-sm-4 col-form-label">Product</label>
+            <div class="col-sm-8">
+              <select
+                class="form-control"
+                required
+                name="ProductID"
+                [(ngModel)]="productOrder.ProductID"
+                #ProductID="ngModel"
+                (change)="getMRPforProduct($event)"
+              >
+                <option
+                  *ngFor="let option of productList"
+                  [value]="option.ID"
+                  >{{ option.Name }}</option
+                >
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="MRP" class="col-sm-4 col-form-label">MRP</label>
+            <div class="col-sm-8">
+              <input
+                type="number"
+                class="form-control"
+                required
+                [(ngModel)]="productOrder.MRP"
+                #MRP="ngModel"
+                name="MRP"
+                (change)="setAmount()"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="QTY" class="col-sm-4 col-form-label">QTY</label>
+            <div class="col-sm-8">
+              <input
+                type="number"
+                class="form-control"
+                required
+                [(ngModel)]="productOrder.QTY"
+                #QTY="ngModel"
+                name="QTY"
+                (change)="setAmount()"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="Amount" class="col-sm-4 col-form-label">Amount</label>
+            <div class="col-sm-8">
+              <input
+                type="number"
+                class="form-control"
+                readonly
+                [(ngModel)]="productOrder.Amount"
+                #Amount="ngModel"
+                name="Amount"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="Discount" class="col-sm-4 col-form-label"
+              >Discount Amount</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="productOrder.DiscountAmount"
+                #DiscountAmount="ngModel"
+                name="DiscountAmount"
+                readonly
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="Payable" class="col-sm-4 col-form-label"
+              >Payable Amount</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="number"
+                class="form-control"
+                readonly
+                [(ngModel)]="productOrder.PayableAmount"
+                #PayableAmount="ngModel"
+                name="PayableAmount"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="OrderMode" class="col-sm-4 col-form-label"
+              >Order Mode</label
+            >
+            <div class="col-sm-8">
+              <select
+                class="form-control"
+                required
+                [(ngModel)]="productOrder.Mode"
+                #Mode="ngModel"
+                name="Mode"
+              >
+                <option value="1">Online</option>
+                <option value="2">Offline</option>
+              </select>
+            </div>
+          </div>
+          <div class="float-right">
+            <button
+              class="btn btn-primary"
+              type="submit"
+              [disabled]="!productForm.form.valid"
+            >
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
